@@ -1,0 +1,46 @@
+ALTER TABLE members RENAME COLUMN dob TO date_of_birth;
+
+ALTER TABLE members
+    ADD COLUMN age INTEGER,
+    ADD COLUMN country VARCHAR(100),
+    ADD COLUMN state_city_province VARCHAR(120),
+    ADD COLUMN height_cm INTEGER,
+    ADD COLUMN current_weight_kg INTEGER,
+    ADD COLUMN main_training_goal TEXT,
+    ADD COLUMN previous_weight_loss TEXT,
+    ADD COLUMN weight_regain VARCHAR(50),
+    ADD COLUMN prior_training_experience TEXT,
+    ADD COLUMN daily_training_commitment_hours VARCHAR(50),
+    ADD COLUMN preferred_workout_timing VARCHAR(50),
+    ADD COLUMN days_per_week_train INTEGER,
+    ADD COLUMN personal_training_before VARCHAR(50),
+    ADD COLUMN goal_reward TEXT,
+    ADD COLUMN additional_info TEXT,
+    ADD COLUMN alcohol_consumption TEXT,
+    ADD COLUMN smoking_habits TEXT,
+    ADD COLUMN supplements_past VARCHAR(50),
+    ADD COLUMN steroid_usage VARCHAR(50),
+    ADD COLUMN stress_level INTEGER,
+    ADD COLUMN sleep_hours INTEGER,
+    ADD COLUMN past_sports_activity TEXT,
+    ADD COLUMN food_preference VARCHAR(80),
+    ADD COLUMN activity_level VARCHAR(80),
+    ADD COLUMN typical_day TEXT,
+    ADD COLUMN current_diet_plan TEXT,
+    ADD COLUMN favorite_foods TEXT,
+    ADD COLUMN food_allergies TEXT,
+    ADD COLUMN medical_condition TEXT,
+    ADD COLUMN injuries TEXT,
+    ADD COLUMN medical_conditions_detailed TEXT,
+    ADD COLUMN push_up TEXT,
+    ADD COLUMN squat TEXT,
+    ADD COLUMN row_band_dumbbell TEXT,
+    ADD COLUMN overhead_press_dumbbell TEXT,
+    ADD COLUMN hip_hinge_rdl TEXT,
+    ADD COLUMN front_view TEXT,
+    ADD COLUMN side_view TEXT,
+    ADD COLUMN back_view TEXT;
+
+CREATE INDEX IF NOT EXISTS ix_members_coach_email_email
+    ON members (coach_email, LOWER(email))
+    WHERE email IS NOT NULL;
