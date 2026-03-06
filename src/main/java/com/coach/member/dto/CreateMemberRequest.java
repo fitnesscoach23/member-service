@@ -1,5 +1,6 @@
 package com.coach.member.dto;
 
+import com.coach.member.entity.MemberStatus;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import jakarta.validation.constraints.NotBlank;
 
@@ -51,5 +52,6 @@ public record CreateMemberRequest(
         String frontView,
         String sideView,
         String backView,
+        MemberStatus status,
         String notes
 ) {}

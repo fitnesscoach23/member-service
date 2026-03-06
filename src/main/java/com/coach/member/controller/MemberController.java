@@ -46,4 +46,10 @@ public class MemberController {
         service.deleteMember(current.getCoachEmail(), id);
         return ResponseEntity.noContent().build();
     }
+
+    @PatchMapping("/{id}/status")
+    public ResponseEntity<?> updateStatus(@PathVariable UUID id, @Valid @RequestBody UpdateMemberStatusRequest req) {
+        service.updateMemberStatus(current.getCoachEmail(), id, req.status());
+        return ResponseEntity.ok().build();
+    }
 }

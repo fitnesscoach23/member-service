@@ -2,6 +2,7 @@ package com.coach.member.service;
 
 import com.coach.member.dto.*;
 import com.coach.member.entity.Member;
+import com.coach.member.entity.MemberStatus;
 import com.coach.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -95,9 +96,19 @@ public class MemberService {
         if (req.frontView() != null) m.setFrontView(req.frontView());
         if (req.sideView() != null) m.setSideView(req.sideView());
         if (req.backView() != null) m.setBackView(req.backView());
+        if (req.status() != null) m.setStatus(req.status());
         if (req.notes() != null) m.setNotes(req.notes());
         m.setUpdatedAt(Instant.now());
 
+        repository.save(m);
+    }
+
+    public void updateMemberStatus(String coachEmail, UUID id, MemberStatus status) {
+        Member m = repository.findById(id)
+                .filter(mem -> mem.getCoachEmail().equals(coachEmail))
+                .orElseThrow(() -> new RuntimeException("Member not found"));
+        m.setStatus(status);
+        m.setUpdatedAt(Instant.now());
         repository.save(m);
     }
 
@@ -157,6 +168,7 @@ public class MemberService {
                 m.getFrontView(),
                 m.getSideView(),
                 m.getBackView(),
+                m.getStatus(),
                 m.getNotes(),
                 m.getCreatedAt(),
                 m.getUpdatedAt()
@@ -223,6 +235,11 @@ public class MemberService {
         member.setFrontView(req.frontView());
         member.setSideView(req.sideView());
         member.setBackView(req.backView());
+        if (req.status() != null) {
+            member.setStatus(req.status());
+        } else if (member.getStatus() == null) {
+            member.setStatus(MemberStatus.ACTIVE);
+        }
         member.setNotes(req.notes());
     }
 }

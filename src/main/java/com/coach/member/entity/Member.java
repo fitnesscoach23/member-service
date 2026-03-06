@@ -70,6 +70,9 @@ public class Member {
     private String sideView;
     private String backView;
     private String notes;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private MemberStatus status;
 
     @Column(nullable = false)
     private Instant createdAt;

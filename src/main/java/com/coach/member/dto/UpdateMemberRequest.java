@@ -1,5 +1,6 @@
 package com.coach.member.dto;
 
+import com.coach.member.entity.MemberStatus;
 import com.fasterxml.jackson.annotation.JsonAlias;
 
 import java.time.LocalDate;
@@ -50,5 +51,6 @@ public record UpdateMemberRequest(
         String frontView,
         String sideView,
         String backView,
+        MemberStatus status,
         String notes
 ) {}

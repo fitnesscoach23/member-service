@@ -1,5 +1,6 @@
 package com.coach.member.dto;
 
+import com.coach.member.entity.MemberStatus;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.UUID;
@@ -52,6 +53,7 @@ public record MemberResponse(
         String frontView,
         String sideView,
         String backView,
+        MemberStatus status,
         String notes,
         Instant createdAt,
         Instant updatedAt
