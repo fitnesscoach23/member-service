@@ -18,6 +18,7 @@ import java.util.UUID;
 public class MemberService {
 
     private final MemberRepository repository;
+    private final BodyMetricsService bodyMetricsService;
 
     public UUID createMember(String coachEmail, CreateMemberRequest req) {
         String normalizedEmail = normalize(req.email());
@@ -120,6 +121,7 @@ public class MemberService {
     }
 
     private MemberResponse toResponse(Member m) {
+        BodyMetricsResponse bodyMetrics = bodyMetricsService.getBodyMetricsIfExists(m.getId());
         return new MemberResponse(
                 m.getId(),
                 m.getCoachEmail(),
@@ -170,6 +172,7 @@ public class MemberService {
                 m.getBackView(),
                 m.getStatus(),
                 m.getNotes(),
+                bodyMetrics,
                 m.getCreatedAt(),
                 m.getUpdatedAt()
         );

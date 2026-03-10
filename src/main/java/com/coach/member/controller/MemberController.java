@@ -1,6 +1,7 @@
 package com.coach.member.controller;
 
 import com.coach.member.dto.*;
+import com.coach.member.service.BodyMetricsService;
 import com.coach.member.service.MemberService;
 import com.coach.member.util.CurrentUserUtil;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,7 @@ import java.util.UUID;
 public class MemberController {
 
     private final MemberService service;
+    private final BodyMetricsService bodyMetricsService;
     private final CurrentUserUtil current;
 
     @PostMapping
@@ -28,6 +30,19 @@ public class MemberController {
     @GetMapping("/{id}")
     public ResponseEntity<MemberResponse> get(@PathVariable UUID id) {
         return ResponseEntity.ok(service.getMember(current.getCoachEmail(), id));
+    }
+
+    @GetMapping("/{id}/body-metrics")
+    public ResponseEntity<BodyMetricsResponse> getBodyMetrics(@PathVariable UUID id) {
+        return ResponseEntity.ok(bodyMetricsService.getBodyMetrics(current.getCoachEmail(), id));
+    }
+
+    @PutMapping("/{id}/body-metrics")
+    public ResponseEntity<BodyMetricsResponse> upsertBodyMetrics(
+            @PathVariable UUID id,
+            @Valid @RequestBody BodyMetricsRequest req
+    ) {
+        return ResponseEntity.ok(bodyMetricsService.upsertBodyMetrics(current.getCoachEmail(), id, req));
     }
 
     @GetMapping

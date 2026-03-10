@@ -55,6 +55,7 @@ public record MemberResponse(
         String backView,
         MemberStatus status,
         String notes,
+        BodyMetricsResponse bodyMetrics,
         Instant createdAt,
         Instant updatedAt
 ) {}
