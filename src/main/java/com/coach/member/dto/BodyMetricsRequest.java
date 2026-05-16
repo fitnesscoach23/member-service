@@ -14,7 +14,7 @@ public record BodyMetricsRequest(
         @NotNull Boolean isLean,
         @NotNull @DecimalMin("1.2") @DecimalMax("1.9") Double activityFactor,
         @NotNull @DecimalMin("0.8") @DecimalMax("2.0") Double proteinRda,
-        @DecimalMin("3.0") @DecimalMax("4.0") Double carbFactor,
+        Double carbFactor,
         @NotNull TargetGoal targetGoal,
         @NotNull @DecimalMin("10.0") @DecimalMax("16.0") Double targetCalorieFactor,
 
